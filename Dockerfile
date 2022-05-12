@@ -13,6 +13,7 @@ RUN OS= && dpkgArch="$(dpkg --print-architecture)" && \
 	curl -o supertokens.zip -s -X GET \
 	"https://api.supertokens.io/0/app/download?pluginName=$PLUGIN_NAME&os=$OS&mode=DEV&binary=$PLAN_TYPE&targetCore=$CORE_VERSION&targetPlugin=$PLUGIN_VERSION" \
 	-H "api-version: 0"
+RUN curl --create-dirs -o $HOME/.postgresql/root.crt -O "https://cockroachlabs.cloud/clusters/$COCKROACHDB_CLUSER_ID/cert"
 RUN unzip supertokens.zip
 RUN cd supertokens && ./install
 FROM debian:stable-slim
